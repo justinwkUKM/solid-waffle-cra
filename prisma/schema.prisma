@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String?
+  email     String   @unique
+  password  String
+  role      String   @default("SUBMITTER") // SUBMITTER, ASSESSOR
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  assessments Assessment[]
+  notifications Notification[]
+}
+
+model Assessment {
+  id        String   @id @default(cuid())
+  title     String
+  data      String   // Storing JSON string of the assessment data
+  status    String   @default("DRAFT") // DRAFT, COMPLETED, SUBMITTED, CHANGES_REQUESTED, APPROVED, REJECTED
+  reviewerFeedback String? // Feedback from the assessor
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  type      String   @default("INFO") // INFO, SUCCESS, WARNING, ERROR
+  read      Boolean  @default(false)
+  link      String?
+  createdAt DateTime @default(now())
+}

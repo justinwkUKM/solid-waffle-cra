@@ -1,65 +1,137 @@
-import Image from "next/image";
+import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowRight, FileSpreadsheet, Sparkles, ShieldCheck, BarChart3, Zap, Lock } from 'lucide-react';
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white text-slate-900 font-sans">
+      {/* Navigation */}
+      <nav className="flex items-center justify-between px-6 py-6 max-w-7xl mx-auto">
+        <div className="flex items-center gap-4">
+          {/* PayNet Logo */}
+          <Image
+            src="/paynet-logo/PayNet_idMP2sqDgs_0.svg"
+            alt="PayNet Logo"
+            width={120}
+            height={32}
+            className="h-8 w-auto"
+            priority
+          />
+          <div className="h-6 w-px bg-slate-200"></div>
+          <span className="text-lg font-semibold tracking-tight text-slate-700">Cloud Risk Assessment</span>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        <div className="flex items-center gap-4">
+          <Link
+            href="/cra"
+            className="text-sm font-medium text-slate-600 hover:text-paynet-blue transition-colors"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Launch App
+          </Link>
+          <Link
+            href="/cra"
+            className="bg-paynet-blue hover:bg-sky-600 text-white text-sm font-medium px-4 py-2 rounded-full transition-all shadow-sm hover:shadow-sky-500/25"
           >
-            Documentation
-          </a>
+            Get Started
+          </Link>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <main className="max-w-7xl mx-auto px-6 pt-20 pb-32">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-2 bg-sky-50 border border-sky-100 text-paynet-blue px-4 py-1.5 rounded-full text-sm font-medium mb-8 animate-fade-in-up">
+            <Sparkles className="w-4 h-4" />
+            <span>Now with AI-Powered Analysis</span>
+          </div>
+          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight">
+            Automate your <span className="text-transparent bg-clip-text bg-gradient-to-r from-paynet-blue to-paynet-light">Cyber Risk Assessment</span>
+          </h1>
+          <p className="text-xl text-slate-600 mb-10 leading-relaxed">
+            Upload your CRA Excel workbooks, parse complex data instantly, and leverage Gemini AI to analyze responses, identify gaps, and generate mitigation plans.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/cra"
+              className="group bg-slate-900 hover:bg-slate-800 text-white text-lg font-medium px-8 py-4 rounded-full transition-all shadow-lg hover:shadow-xl flex items-center gap-2"
+            >
+              Start Assessment
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <button className="text-slate-600 hover:text-slate-900 font-medium px-8 py-4 flex items-center gap-2 transition-colors">
+              View Documentation
+            </button>
+          </div>
+        </div>
+
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
+          <FeatureCard
+            icon={<FileSpreadsheet className="w-6 h-6 text-emerald-600" />}
+            title="Instant Parsing"
+            description="Drag & drop your Excel files. We automatically extract Cloud Solution Details and Assessment responses in seconds."
+            color="bg-emerald-50 border-emerald-100"
+          />
+          <FeatureCard
+            icon={<Sparkles className="w-6 h-6 text-violet-600" />}
+            title="AI Analysis"
+            description="Our AI engine reviews every answer, providing a PASS/FAIL opinion, reasoning, and identifying required actions."
+            color="bg-violet-50 border-violet-100"
+          />
+          <FeatureCard
+            icon={<Zap className="w-6 h-6 text-amber-600" />}
+            title="Auto-Mitigation"
+            description="Found a gap? Generate professional mitigation plans and remediation steps with a single click."
+            color="bg-amber-50 border-amber-100"
+          />
+        </div>
+
+        {/* Stats / Trust */}
+        <div className="mt-32 border-t border-slate-200 pt-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <Stat label="Questions Processed" value="10k+" />
+            <Stat label="Time Saved" value="85%" />
+            <Stat label="Accuracy" value="99.9%" />
+            <Stat label="Security" value="Enterprise" />
+          </div>
         </div>
       </main>
+
+      {/* Footer */}
+      <footer className="bg-white border-t border-slate-200 py-12">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-slate-500 text-sm">
+            © 2026 PayNet. Built for Security Professionals by CISO R&D team.
+          </p>
+          <div className="flex gap-6">
+            <a href="#" className="text-slate-400 hover:text-slate-600 transition-colors">Privacy</a>
+            <a href="#" className="text-slate-400 hover:text-slate-600 transition-colors">Terms</a>
+            <a href="#" className="text-slate-400 hover:text-slate-600 transition-colors">Contact</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+function FeatureCard({ icon, title, description, color }: { icon: React.ReactNode, title: string, description: string, color: string }) {
+  return (
+    <div className={`p-8 rounded-3xl border ${color} hover:shadow-lg transition-all duration-300 cursor-default group`}>
+      <div className="bg-white w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm mb-6 group-hover:scale-110 transition-transform duration-300">
+        {icon}
+      </div>
+      <h3 className="text-xl font-bold text-slate-900 mb-3">{title}</h3>
+      <p className="text-slate-600 leading-relaxed">
+        {description}
+      </p>
+    </div>
+  );
+}
+
+function Stat({ label, value }: { label: string, value: string }) {
+  return (
+    <div>
+      <div className="text-4xl font-extrabold text-slate-900 mb-2">{value}</div>
+      <div className="text-sm font-medium text-slate-500 uppercase tracking-wider">{label}</div>
     </div>
   );
 }
